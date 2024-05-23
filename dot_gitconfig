@@ -1,0 +1,9 @@
+[user]
+	name = Alexander Karmes
+	email = alexander.karmes@gmail.com
+[fetch]
+	prune = true
+[pager]
+	branch = false
+[init]
+	defaultBranch = main
