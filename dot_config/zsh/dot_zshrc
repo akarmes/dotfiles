@@ -1,0 +1,142 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ------------------ Options ------------------
+
+setopt correct                                                  # Auto correct mistakes
+setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob                                               # Case insensitive globbing
+setopt rcexpandparam                                            # Array expension with parameters
+setopt nocheckjobs                                              # Don't warn about running processes when exiting
+setopt numericglobsort                                          # Sort filenames numerically when it makes sense
+setopt nobeep                                                   # No beep
+setopt appendhistory                                            # Immediately append history instead of overwriting
+setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt autocd                                                   # if only directory path is entered, cd there.
+setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
+setopt histignorespace                                          # Don't save commands that start with space
+
+# ------------------ History ------------------
+
+export HISTFILE=$ZDOTDIR/.zsh_history
+export HISTSIZE=50000                                           # How many commands zsh will load to memory.
+export SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS                                     # History won't save duplicates.
+setopt HIST_FIND_NO_DUPS                                        # History won't show duplicates on search.
+
+# ------------------ Completions ------------------
+
+COMPLETIONS_DIR="$ZDOTDIR/completions"
+mkdir -p $ZDOTDIR/completions
+fpath=($ZDOTDIR/completions $fpath)
+
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' # Case insensitive tab completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
+zstyle ':completion:*' menu select                              # Highlight menu selection
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $ZDOTDIR/cache
+
+WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
+
+# ------------------ Plugins ------------------
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh           # Use syntax highlighting
+
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh # Use history substring search
+# bind UP and DOWN arrow keys to history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up			
+bindkey '^[[B' history-substring-search-down
+
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme                           # Use powerlevel10k theme
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh                        # To customize run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# ------------------ Keybindings ------------------
+bindkey -e
+bindkey '^[[7~' beginning-of-line                               # Home key - Go to beginning of line
+bindkey '^[[H' beginning-of-line                                # Home key
+if [[ "${terminfo[khome]}" != "" ]]; then
+  bindkey "${terminfo[khome]}" beginning-of-line                # Home key
+fi
+bindkey '^[[8~' end-of-line                                     # End key - Go to end of line
+bindkey '^[[F' end-of-line                                      # End key
+if [[ "${terminfo[kend]}" != "" ]]; then
+  bindkey "${terminfo[kend]}" end-of-line                       # End key
+fi
+bindkey '^[[2~' overwrite-mode                                  # Insert key
+bindkey '^[[3~' delete-char                                     # Delete key
+bindkey '^[[C'  forward-char                                    # Right key
+bindkey '^[[D'  backward-char                                   # Left key
+bindkey '^[[5~' history-beginning-search-backward               # Page up key
+bindkey '^[[6~' history-beginning-search-forward                # Page down key
+bindkey '^[Oc' forward-word                                     # Ctlr+right
+bindkey '^[[1;5C' forward-word                                  # Ctlr+right
+bindkey '^[Od' backward-word                                    # Ctlr+left
+bindkey '^[[1;5D' backward-word                                 # Ctlr+left
+bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
+bindkey '^[[Z' undo                                             # Shift+tab undo last action
+
+# ------------------ CLI Applications ------------------
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh # See: https://wiki.archlinux.org/title/Fzf
+source /usr/share/fzf/completion.zsh # See: https://wiki.archlinux.org/title/Fzf
+export FZF_DEFAULT_OPTS=" \
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" # See: https://github.com/catppuccin/fzf
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --style=numbers --line-range=:250 {} 2> /dev/null || eza --tree --color=always {} | head -100'"
+export FZF_ALT_C_COMMAND="fd --type=d --strip-cwd-prefix --exclude .git"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -100'"
+
+# zoxide
+eval "$(zoxide init zsh)"
+export _ZO_FZF_OPTS="--no-sort --height 75% --reverse --margin=0,1 --exit-0 --select-1 --preview='eza --tree --color=always {2..} | head -100'"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# asdf
+. /opt/asdf-vm/asdf.sh
+
+# fnm
+export PATH="$HOME/.local/share/fnm:$PATH"
+eval "`fnm env`"
+
+# gcloud
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
+# ------------------ Custom Completions ------------------
+
+fnm completions --shell=zsh > $COMPLETIONS_DIR/_fnm
+
+autoload -U compinit colors zcalc
+compinit -d
+colors
+
+# ------------------ Editor ------------------
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# ------------------ Aliases ------------------
+
+alias k=kubectl
+alias vim=nvim
+alias ll='eza -la'
+alias ls='eza'
+alias cd='z'
+alias cdi='zi'
