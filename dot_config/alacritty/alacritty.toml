@@ -21,13 +21,3 @@ padding ={ x = 0, y = 0 }
 
 [env]
 TERM = "xterm-256color"
-
-# [keyboard]
-# bindings = [
-#   { key = "Right", mods = "Control", chars = "\u001BF" }, # Jump word right
-#   { key = "Left",  mods = "Control", chars = "\u001BB" }, # Jump word left
-#   { key = "Left", mods = "Control|Super", chars = "\u001bOH", mode = "AppCursor" }, # Goto ^
-#   { key = "Right", mods= "Control|Super", chars= "\u001bOF", mode= "AppCursor" }, # Goto $
-#   { key = "Back", mods = "Control", chars= "\u001b\u007f" }, # Delete word
-#   { key = "Back", mods = "Control|Super", chars= "\u0015" }, # Delete line
-# ]
