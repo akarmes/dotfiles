@@ -1,9 +1,30 @@
 [user]
 	name = Alexander Karmes
 	email = alexander.karmes@gmail.com
+
+[core]
+	excludesfile = ~/.gitignore
+
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+
 [fetch]
 	prune = true
+
 [pager]
 	branch = false
+
 [init]
 	defaultBranch = main
+
+[alias]
+	rebase-branch = '!git fetch origin $1 && git rebase origin/$1 && :'
+	merge-branch = '!git fetch origin $1; git merge origin/$1 && :'
+	rebase-main = rebase-branch main
+	merge-main = merge-branch main
+	rebase-master = rebase-branch master
+	merge-master = merge-branch master
+	rebase-dev = rebase-branch development
+	merge-dev = merge-branch development
