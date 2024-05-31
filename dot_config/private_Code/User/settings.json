@@ -16,8 +16,8 @@
 
   /* ------------ UI ------------ */
   // Themes
-  "workbench.iconTheme": "catppuccin-macchiato",
-  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "editor.fontFamily": "'JetBrainsMono Nerd Font'",
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
   "terminal.integrated.fontSize": 14,
@@ -76,6 +76,7 @@
     "ibiquity",
     "instanceof",
     "ioports",
+    "jetbrainsmono",
     "JSNAD",
     "jumpbox",
     "kawabunga",
