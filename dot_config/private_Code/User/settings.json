@@ -127,6 +127,7 @@
     "whereis",
     "xperi"
   ],
+  "redhat.telemetry.enabled": false,
 
   /* ------------ Other configuration ------------ */
 }

@@ -5,7 +5,7 @@ if [[ -r "$CACHE_DIR/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then # Initializati
   source "$CACHE_DIR/p10k-instant-prompt-${(%):-%n}.zsh"          # confirmations, etc.) must go above this block; everything else may go below.
 fi
 
-export PATH=~/.local/bin:$PATH
+export PATH=~/.local/bin:~/go/bin:$PATH
 
 # ------------------ Options ------------------
 

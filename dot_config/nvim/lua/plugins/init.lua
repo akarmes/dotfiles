@@ -1,31 +1,63 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
   },
 
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
-    end,
-  },
-
+  -- These are some examples, uncomment them if you want to see them work!
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   config = function()
+  --     require("nvchad.configs.lspconfig").defaults()
+  --     require "configs.lspconfig"
+  --   end,
+  -- },
+  --
   {
   	"williamboman/mason.nvim",
   	opts = {
   		ensure_installed = {
-        "gopls",
-        "html-lsp",
-        "css-lsp",
-        "typescript-language-server",
-        "vue-language-server",
-  			-- "lua-language-server", "stylua",
-  			-- "prettier"
+  			"lua-language-server",
+        "stylua",
+  			"html-lsp",
+        "css-lsp" ,
+        "prettier",
+        "gopls"
+  		},
+  	},
+  },
+
+  {
+  	"nvim-treesitter/nvim-treesitter",
+  	opts = {
+  		ensure_installed = {
+  			"vim",
+        "lua",
+        "vimdoc",
+        "tmux",
+        "markdown",
+        "yaml",
+        "json",
+        "toml",
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "typescript",
+        "vue",
+        "terraform",
+        "dockerfile",
+        "helm",
+        "go",
+        "gomod",
+        "gowork",
+        "gotmpl",
+        "gosum",
+        "python",
+        "sql",
   		},
   	},
   },
@@ -33,26 +65,5 @@ return {
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
-  },
-
-  {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-        -- defaults
-  			"vim",
-        "lua",
-        "vimdoc",
-        -- webdev
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        -- other
-        "terraform",
-        "go",
-        "python"
-  		},
-  	},
   },
 }
