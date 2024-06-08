@@ -8,6 +8,7 @@ o.tabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
 o.softtabstop = 2
+o.scrolloff = 8
 
 o.colorcolumn = '100'
 -- o.cursorlineopt ='both' -- to enable cursorline!

@@ -74,6 +74,7 @@
     "gcloud",
     "hostnames",
     "ibiquity",
+    "Idempotency",
     "instanceof",
     "ioports",
     "jetbrainsmono",
@@ -128,6 +129,25 @@
     "xperi"
   ],
   "redhat.telemetry.enabled": false,
+
+  /* ------------ Vim ------------ */
+
+  "vim.useSystemClipboard": true,
+  "vim.leader": "<Space>",
+  "vim.normalModeKeyBindings": [
+     { "before": [";"], "after": [":"] },
+
+     // Files
+     { "before": ["<C-S>"], "commands": [":w"] }, // save file
+     { "before": ["<C-C>"], "commands": ["ggVG"] },
+     { "before": ["<leader>", "f", "f"], "commands": ["workbench.action.quickOpen"] },
+
+     // Buffers
+     { "before": ["<Tab>"], "commands": [":bnext"] },
+     { "before": ["<S-Tab>"], "commands": [":bprevious"] },
+     { "before": ["<leader>", "b"], "commands": [":enew"] },
+     { "before": ["<leader>", "x"], "commands": [":bdelete"] },
+  ]
 
   /* ------------ Other configuration ------------ */
 }
