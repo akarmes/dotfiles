@@ -102,6 +102,22 @@ less_termcap[so]="${fg_bold[white]}${bg[black]}"
 less_termcap[se]="${reset_color}"
 less_termcap[us]="${fg_bold[green]}"
 
+# ------------------ Editor ------------------
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# ------------------ Aliases ------------------
+
+alias k=kubectl
+alias vim=nvim
+alias ll='eza -la'
+alias ls='eza'
+alias cd='z'
+alias cdi='zi'
+alias bat=batcat
+alias fd=fdfind
+
 # ------------------ CLI Applications ------------------
 
 # fzf
@@ -111,10 +127,10 @@ export FZF_DEFAULT_OPTS=" \
   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" # See: https://github.com/catppuccin/fzf
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_COMMAND="fdfind --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --style=numbers --line-range=:250 {} 2> /dev/null || eza --tree --color=always {} | head -100'"
-export FZF_ALT_C_COMMAND="fd --type=d --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always --style=numbers --line-range=:250 {} 2> /dev/null || eza --tree --color=always {} | head -100'"
+export FZF_ALT_C_COMMAND="fdfind --type=d --strip-cwd-prefix --exclude .git"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -100'"
 
 # zoxide
@@ -131,22 +147,5 @@ eval "$(direnv hook zsh)"
 export PATH="$HOME/.local/share/fnm:$PATH"
 eval "$(fnm env --use-on-cd)"
 
-# # gcloud
-# if [ -f "$HOME/.local/share/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/.local/share/google-cloud-sdk/path.zsh.inc"; fi
-# if [ -f "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc"; fi
-
-
-# ------------------ Editor ------------------
-
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-# ------------------ Aliases ------------------
-
-alias k=kubectl
-alias vim=nvim
-alias ll='eza -la'
-alias ls='eza'
-alias cd='z'
-alias cdi='zi'
-alias bat='batcat'
+# gcloud
+if [ -f "/usr/share/google-cloud-sdk/completion.zsh.inc" ]; then . "/usr/share/google-cloud-sdk/completion.zsh.inc"; fi
