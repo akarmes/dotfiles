@@ -1,7 +1,10 @@
 [user]
 	name = Alexander Karmes
 	email = alexander.karmes@gmail.com
-	signingkey = 395AFAAD71DA2620
+	{{ if .git.signingkey -}}
+	signingkey = {{ .git.signingkey }}
+	{{- end }}
+
 
 [core]
 	excludesfile = ~/.gitignore
@@ -30,4 +33,6 @@
 	rebase-dev = rebase-branch development
 	merge-dev = merge-branch development
 [commit]
+	{{ if .git.signingkey -}}
 	gpgsign = true
+	{{- end }}
