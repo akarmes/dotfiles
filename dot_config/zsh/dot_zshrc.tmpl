@@ -61,10 +61,15 @@ bindkey '^[[C'  forward-char                                    # Right key
 bindkey '^[[D'  backward-char                                   # Left key
 bindkey '^[[5~' history-beginning-search-backward               # Page up key
 bindkey '^[[6~' history-beginning-search-forward                # Page down key
+{{ if eq .chezmoi.os "darwin" }}
+bindkey "^[[1;3C" forward-word                                  # Option+right
+bindkey "^[[1;3D" backward-word                                 # Option+left
+{{ else if eq .chezmoi.os "linux" }}
 bindkey '^[Oc' forward-word                                     # Ctlr+right
 bindkey '^[[1;5C' forward-word                                  # Ctlr+right
 bindkey '^[Od' backward-word                                    # Ctlr+left
 bindkey '^[[1;5D' backward-word                                 # Ctlr+left
+{{ end }}
 bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
