@@ -117,6 +117,7 @@ export VISUAL='nvim'
 {{ if eq .chezmoi.os "darwin" -}}
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 {{- end }}
 
 # zoxide
@@ -171,9 +172,14 @@ alias ll='eza -la'
 alias ls='eza'
 alias cd='z'
 alias cdi='zi'
-{{- if ne .binaries.bat "bat" -}}
+{{ if ne .binaries.bat "bat" -}}
 alias bat={{ .binaries.bat }}
 {{- end -}}
-{{- if ne .binaries.fd "fd" -}}
+{{ if ne .binaries.fd "fd" -}}
 alias fd={{ .binaries.fd }}
-{{- end -}}
+{{- end }}
+
+# ------------------ Completions ------------------
+
+autoload -Uz compinit
+compinit
