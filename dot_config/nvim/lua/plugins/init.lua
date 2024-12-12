@@ -25,7 +25,8 @@ return {
         "css-lsp",
         "prettier",
         "typescript-language-server",
-        "gopls"
+        "gopls",
+        "terraform-ls"
       },
     },
   },
