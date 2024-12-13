@@ -165,6 +165,9 @@ if [ -f "/usr/share/google-cloud-sdk/completion.zsh.inc" ]; then . "/usr/share/g
 . /opt/asdf-vm/asdf.sh
 {{- end }}
 
+# mise
+eval "$(mise activate zsh)"
+
 # ------------------ Aliases ------------------
 
 alias k=kubectl

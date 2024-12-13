@@ -2,7 +2,7 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", ";", ":", { desc = "CMD ; command mode" })
 
 -- vim-tmux-navigator
 map({ "n", "i", "v" }, "<C-h>", "<cmd> TmuxNavigateLeft <cr>", { desc = "window left" })

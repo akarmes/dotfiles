@@ -14,6 +14,20 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- lua
+lspconfig.lua_ls.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+          globals = { 'vim' }
+      }
+    }
+  }
+}
+
 -- typescript
 lspconfig.tsserver.setup {
   on_attach = on_attach,
@@ -38,4 +52,11 @@ lspconfig.gopls.setup {
       }
     }
   }
+}
+
+-- terraform
+lspconfig.terraformls.setup {
+  cmd = { "terraform-ls", "serve" },
+  filetypes = { "terraform", "terraform-vars" },
+  root_dir = lspconfig.util.root_pattern('.terraform', '.git'),
 }

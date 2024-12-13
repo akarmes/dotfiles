@@ -16,25 +16,26 @@ return {
   },
 
   {
-  	"williamboman/mason.nvim",
-  	opts = {
-  		ensure_installed = {
-  			"lua-language-server",
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
         "stylua",
-  			"html-lsp",
-        "css-lsp" ,
+        "html-lsp",
+        "css-lsp",
         "prettier",
         "typescript-language-server",
-        "gopls"
-  		},
-  	},
+        "gopls",
+        "terraform-ls"
+      },
+    },
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim",
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
         "lua",
         "vimdoc",
         "tmux",
@@ -48,6 +49,7 @@ return {
         "javascript",
         "typescript",
         "vue",
+        "hcl",
         "terraform",
         "dockerfile",
         "helm",
@@ -58,8 +60,8 @@ return {
         "gosum",
         "python",
         "sql",
-  		},
-  	},
+      },
+    },
   },
 
   {

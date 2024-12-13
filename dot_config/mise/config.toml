@@ -1,0 +1,6 @@
+[tools]
+terragrunt = "0.43.2"
+terraform = "1.5.7"
+
+[settings]
+legacy_version_file = false
