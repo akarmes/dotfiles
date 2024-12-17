@@ -5,7 +5,6 @@
 	signingkey = {{ .git.signingkey }}
 	{{- end }}
 
-
 [core]
 	excludesfile = ~/.gitignore
 
@@ -16,6 +15,9 @@
 
 [fetch]
 	prune = true
+
+[push]
+	autoSetupRemote = true
 
 [pager]
 	branch = false
