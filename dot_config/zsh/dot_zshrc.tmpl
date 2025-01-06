@@ -158,12 +158,15 @@ eval "$(mise activate zsh)"
 
 # ------------------ Aliases ------------------
 
-alias k=kubectl
-alias vim=nvim
+alias ls='eza' # Use eza instead of ls
 alias ll='eza -la'
-alias ls='eza'
-alias cd='z'
+alias cd='z' # Use zoxide instead of cd
 alias cdi='zi'
+alias free='free -m' # Show sizes in MB
+alias df='df -h' # Human-readable sizes
+alias vim=nvim # Use neovim instead of vim
+alias cp="cp -i" # Confirm before overwriting something
+alias k=kubectl
 {{ if ne .binaries.bat "bat" -}}
 alias bat={{ .binaries.bat }}
 {{- end }}

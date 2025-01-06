@@ -1,11 +1,29 @@
-# Set prefix
-unbind C-b
-set -g prefix C-Space
-bind C-Space send-prefix
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'     # Sensible TMUX configuration
+set -g @plugin 'tmux-plugins/tmux-yank'         # Yank plugin
+set -g @plugin 'catppuccin/tmux#v2.1.2'         # Catpuccin theme
+set -g @plugin 'christoomey/vim-tmux-navigator' # VIM style navigation
+set -g @plugin 'sainnhe/tmux-fzf'
+set -g @plugin 'omerxx/tmux-sessionx'
 
-# Set reload shortcut
-unbind r
-bind r source-file ~/.config/tmux/tmux.conf\; display-message "Config reloaded..."
+# Configure sessionx plugin
+set -g @sessionx-bind 'O'
+set -g @sessionx-custom-paths "$HOME/personal,$HOME/work"
+set -g @sessionx-custom-paths-subdirectories 'true'
+
+# Configure catppuccin plugin
+run '~/.config/tmux/plugins/tmux/catppuccin.tmux'
+set -g @catppuccin_flavor 'mocha'
+set -g @catppuccin_status_background "none"
+set -g @catppuccin_window_status_style "basic"
+set -g @catppuccin_window_text_color "#{@thm_bg}"
+set -g @catppuccin_window_current_text_color "#{@thm_surface_0}"
+set -g @catppuccin_window_number_color "#{@thm_blue}"
+set -g @catppuccin_window_current_number_color "#{@thm_peach}"
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_application}"
+
 
 # Vim-like navigation
 #   See: https://github.com/christoomey/vim-tmux-navigator
@@ -40,10 +58,17 @@ bind % split-window -h -c "#{pane_current_path}"
 set-option -g default-shell /bin/zsh
 
 # Set true color
-set-option -sa terminal-overrides ",xterm*:Tc"
+set -g default-terminal "$TERM"
+set -ag terminal-overrides ",$TERM:Tc"
 
-# Configure catppuccin theme
-set -g @catppuccin_flavour 'mocha'
+# Set prefix
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+# Set reload shortcut
+unbind r
+bind r source-file ~/.config/tmux/tmux.conf\; display-message "Config reloaded..."
 
 # Enable mouse support
 set -g mouse on
@@ -54,24 +79,6 @@ set -g status-position top
 # Rebind keys to kill without confirmation
 bind-key & kill-window
 bind-key x kill-pane
-
-# Configure sessionx plugin
-{{ if eq .chezmoi.os "darwin" -}}
-set -g @sessionx-custom-paths '/Users/akarmes/personal,/Users/akarmes/work'
-set -g @sessionx-custom-paths-subdirectories 'true'
-{{ else -}}
-set -g @sessionx-custom-paths '/home/akarmes/personal,/home/akarmes/work'
-set -g @sessionx-custom-paths-subdirectories 'true'
-{{ end -}}
-
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'               # Tmux plugin manager
-set -g @plugin 'tmux-plugins/tmux-sensible'     # Sensible TMUX configuration
-set -g @plugin 'catppuccin/tmux'                # Catpuccin theme
-set -g @plugin 'christoomey/vim-tmux-navigator' # VIM style navigation
-set -g @plugin 'sainnhe/tmux-fzf'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'omerxx/tmux-sessionx'
 
 # Initialize TMUX plugin manager
 run '~/.config/tmux/plugins/tpm/tpm'
